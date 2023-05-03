@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1 id="title">Estrutura de dados</h1>
+
+    <fieldset>
+        <legend>Escolha o tipo de estrutura:</legend>
+    
+        <div>
+          <input type="radio" id="fila" name="tipo" checked/>
+          <label for="fila">Fila</label>
+        </div>
+        <div>
+          <input type="radio" id="pilha" name="tipo"/>
+          <label for="pilha"> Pilha</label>
+        </div>
+        <div>
+            <input type="radio" id="lista" name="tipo" class="checkbox-wrapper-3"/>
+            <label for="lista">Lista</label>
+          </div>
+    </fieldset>
+    
+    <div id="work1">
+        Digite um valor
+        <input type="text" id="input" name="input" autofocus/>
+        <div id="pos"><br>
+            Insira a posição
+            <input type="text" id="posicao" name="posicao" placeholder="No caso de Lista"/>
+        </div><br>
+        <button id="button1" name="button" class="button-add">Adicionar</button>
+        <button id="button2" name="button" class="button-rem">Remover</button>
+        
+    </div>
+    <div id="exp"></div>
+    <br>
+
+    <div id="est"></div>
+
+    <script src="/codigo.js"></script>
+</body>
+</html>
