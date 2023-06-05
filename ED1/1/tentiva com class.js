@@ -11,6 +11,7 @@ exc = 0;
 document.getElementById('exp').innerHTML = "Temos "+ contador +" elementos";
 
 function adicionar(){
+    var arvore = ArvoreBuscaBinaria;
     var text = document.getElementById('input').value;
     var canvas = document.getElementById('meuRetangulo');
     var context = canvas.getContext('2d');
@@ -106,6 +107,8 @@ function adicionar(){
 
     if(checkArv.checked == true){
         if(contador == 0){
+            var novoNo = new No(text);
+            arvore.insercao(novoNo);
             var elem = document.createElement("cl");
             elem.classList.add('shadowbox');    
             elem.appendChild(document.createTextNode(text));
@@ -119,6 +122,8 @@ function adicionar(){
             aux.style.width = "25px";
             contador++;
         }else{
+            var novoNo = new No(text);
+            arvore.insercao(novoNo);
             var topo = est.firstChild;
             var aux = topo;
             var raiz = topo;
@@ -140,6 +145,7 @@ function adicionar(){
                     desceu++;
                 }
             }
+            var configP = aq.getBoundingClientRect();
             var elem = document.createElement("cl");
             elem.classList.add('shadowbox');
         
@@ -148,7 +154,7 @@ function adicionar(){
             est.appendChild(elem);
 
             aux = est.lastChild;
-            var configP = aq.getBoundingClientRect();
+            
             aux.style.position = "absolute";
             var esquerda = 400 / desceu;
             var cima = 40 * desceu;
@@ -164,10 +170,9 @@ function adicionar(){
                 aux.style.width = "25px";
             }
             contador++;
-            var configF = aux.getBoundingClientRect();
-            context.moveTo(configP.x+20, configP.y-435);
+            configF = aux.getBoundingClientRect();
+            context.lineTo(configP.x+20, configP.y-435);
             context.lineTo(configF.x+20, configF.y-435);
-            
             context.stroke();
         }
     }
@@ -272,3 +277,58 @@ function consultar(){
     alert("Foram encontradas " + cont + " ocorrencias");
 }
 cons.addEventListener('click', consultar);
+
+//class
+class No{
+    constructor(data, esquerda = null, direita = null){
+        this.data = data;
+        this.esquerda = esquerda;
+        this.direita = null;
+    }
+}
+
+class ArvoreBuscaBinaria{
+    constructor(root = null){
+        this.root = null;
+    }
+}
+
+ArvoreBuscaBinaria.insercao = function(data){
+    let novoNo = new No(data);
+    console.log(data);
+    console.log(this.root);
+    if (this.root === undefined){
+        this.root = novoNo;
+    } else {
+        this.inserirNo(this.root, novoNo);
+    }
+};
+
+ArvoreBuscaBinaria.inserirNo = function(no, novoNo){
+    if (novoNo.data < no.data){
+        if (no.esquerda === null){
+            no.esquerda = novoNo;
+        } else {
+            this.inserirNo(no.esquerda, novoNo);
+        }
+    } else {
+        if (no.direita === null){
+            no.direita = novoNo;
+        } else {
+            this.inserirNo(no.direita, novoNo);
+        }
+    }
+};
+
+ArvoreBuscaBinaria.pesquisarPai = function(no, data){
+    if (no === null){
+        return null;
+    }
+    else if (data < no.esquerda.data){
+        return this.Pesquisar(no.esquerda, data);
+    } else if (data > no.direita.data){
+        return this.Pesquisar(no.direita, data);
+    } else {
+        return no;
+    }
+};
